@@ -5,6 +5,7 @@ import Bundler from 'parcel'
 import { getCountries } from './api/countries.js'
 import { template } from './src/util/template.js'
 import { Router } from './src/router.js'
+import { initialStates } from './src/init.js'
 
 const app = new App()
 
@@ -27,7 +28,8 @@ if (isProd) {
       Router({
         location: {
           path
-        }
+        },
+        ...initialStates[path]
       })
     )
 

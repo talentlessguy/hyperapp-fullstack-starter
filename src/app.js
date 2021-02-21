@@ -3,6 +3,7 @@ import { Router } from './router.js'
 import '../styles/global.css'
 import { parseUrl, navigateTo } from './util/url.js'
 import { onUrlChange, onUrlRequest } from './subs/navigation.js'
+import { initialStates } from './init.js'
 
 const urlChanged = (state, location) => {
   return { ...state, location }
@@ -13,7 +14,8 @@ const linkClicked = (state, pathname) => {
 
 app({
   init: {
-    location: parseUrl(window.location.pathname + window.location.search)
+    location: parseUrl(location.pathname + location.search),
+    ...initialStates[location.pathname]
   },
   view: Router,
   node: document.getElementById('app'),

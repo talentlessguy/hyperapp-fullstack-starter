@@ -9,14 +9,7 @@ export const Router = (state) => {
     case '/':
       return h('div', {}, Home(state))
     case '/countries':
-      return h(
-        'div',
-        {},
-        Countries({
-          ...state,
-          hello: 'Click to fetch countries info'
-        })
-      )
+      return h('div', {}, Countries(state))
     default:
       return h('div', {}, text('Not Found'))
   }
