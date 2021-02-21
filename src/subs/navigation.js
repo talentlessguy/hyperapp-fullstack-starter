@@ -1,5 +1,10 @@
-import { parseUrl, toSub } from '../util/url.js'
+import { parseUrl, toSub } from '../util/client/url.js'
 
+/**
+ * Subscribe to URL change
+ * @param {*} dispatch
+ * @param {*} param1
+ */
 const urlChange = (dispatch, { action }) => {
   const handler = (_) => {
     const path = location.pathname + location.search
@@ -12,6 +17,11 @@ const urlChange = (dispatch, { action }) => {
   return () => ['popstate', 'hyperapp-location'].map((el) => removeEventListener(el, handler))
 }
 
+/**
+ * Subscribe to link element click
+ * @param {*} dispatch
+ * @param {*} param1
+ */
 const urlRequest = (dispatch, { action }) => {
   const clicks = (event) => {
     if (event.target.matches('a') && !event.ctrlKey && !event.metaKey && !event.shiftKey) {

@@ -1,48 +1,41 @@
 import { App } from '@tinyhttp/app'
-import { renderToString } from 'hyperapp-render'
+import { logger } from '@tinyhttp/logger'
 import serve from 'serve-static'
 import Bundler from 'parcel'
-import { getCountries } from './api/countries.js'
-import { template } from './src/util/template.js'
-import { Router } from './src/router.js'
-import { initialStates } from './src/init.js'
+import { getCountries } from './functions/countries.js/index.js'
+import { renderPage } from './src/util/server/renderPage.js'
 
-const app = new App()
+export const createApp = async () => {
+  const app = new App()
 
-const isProd = process.env.NODE_ENV === 'production'
+  const isProd = process.env.NODE_ENV === 'production'
 
-const PORT = parseInt(process.env.PORT, 10) || 3000
-const HOST = process.env.HOST || 'localhost'
+  // API functions
+  app.get('/api/countries', getCountries)
 
-app.get('/api/countries', getCountries)
+  if (isProd) {
+    const routes = ['/', '/countries', '/about']
 
-if (isProd) {
-  const routes = ['/', '/countries']
-  const renderPage = (path) => async (_, res) => {
-    const prerender = renderToString(
-      Router({
-        location: {
-          path
-        },
-        ...initialStates[path]
+    // Prerender each page in production
+    routes.forEach((route) => app.get(route, renderPage(route)))
+
+    return app.use(serve('dist'))
+  } else {
+    const bundler = new Bundler('./index.html')
+
+    app
+      .use(logger())
+      .use(serve('dist'))
+      .get('*', (_, res) => {
+        // Use a single index.html file in production
+        res.sendFile(`${process.cwd()}/dist/index.html`)
       })
-    )
 
-    res.send(await template(prerender))
+    console.log(`Bundling frontend with Parcel...`)
+
+    // Bundle pages, then start an app
+    await bundler.bundle()
+
+    return app
   }
-
-  routes.forEach((route) => app.get(route, renderPage(route)))
-  app.use(serve('dist')).listen(PORT, () => console.log(`Started a prod server on http://${HOST}:${PORT}`))
-} else {
-  const bundler = new Bundler('./index.html')
-
-  app
-    .get('*', (_, res) => {
-      res.sendFile(`${process.cwd()}/dist/index.html`)
-    })
-    .use(serve('dist'))
-
-  console.log(`Bundling frontend with Parcel...`)
-
-  bundler.bundle().then(() => app.listen(PORT, () => console.log(`Started a dev server on http://${HOST}:${PORT}`)))
 }

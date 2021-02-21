@@ -7,7 +7,8 @@ html {
   height: 100%;
 }
 
-#info {
+#info,
+#mainContainer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,4 +21,12 @@ html {
   gap: 3rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+#body {
+  min-width: 200px;
+}
+
+img {
+  height: 128px;
 }

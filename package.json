@@ -6,14 +6,15 @@
   "type": "module",
   "scripts": {
     "build": "NODE_ENV=production parcel build index.html",
-    "start": "npm run build && NODE_ENV=production node server.js",
-    "dev": "node server.js"
+    "start": "NODE_ENV=production node server.js",
+    "dev": "node dev.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@tinyhttp/app": "^1.1.17",
+    "@tinyhttp/logger": "^1.1.14",
     "hyperapp": "2.0.12",
     "hyperapp-render": "^4.0.0",
     "hyperlit": "^0.3.6",
