@@ -1,5 +1,6 @@
 import jsdom from 'jsdom'
 import fs from 'fs/promises'
+import path from 'path'
 
 /**
  * Render a hyperapp view into an HTML page
@@ -7,7 +8,7 @@ import fs from 'fs/promises'
  * @param {string} title Page title
  */
 export const template = async (prerender, title = 'Fullstack Hyperapp template') => {
-  const htmlFile = await fs.readFile('dist/index.html')
+  const htmlFile = await fs.readFile(path.resolve('dist/index.html'))
 
   // Create DOM abstraction from HTML file
   const dom = new jsdom.JSDOM(htmlFile.toString())
