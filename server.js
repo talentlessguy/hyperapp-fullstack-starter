@@ -1,9 +1,10 @@
 import { App } from '@tinyhttp/app'
 import { renderToString } from 'hyperapp-render'
-import { view } from './src/shared/view.js'
 import serve from 'serve-static'
 import Bundler from 'parcel'
 import { getCountries } from './api/countries.js'
+import { template } from './src/util/template.js'
+import { Router } from './src/router.js'
 
 const app = new App()
 
@@ -13,38 +14,29 @@ const PORT = parseInt(process.env.PORT, 10) || 3000
 const HOST = process.env.HOST || 'localhost'
 
 app
-  .use(serve('dist'))
   .get('/api/countries', getCountries)
-  .get('/', (_, res) => {
+  .use(serve('dist'))
+  .get('*', (req, res) => {
+    res.sendFile(`${process.cwd()}/dist/index.html`)
+  })
+
+if (isProd) {
+  const routes = ['/', '/countries']
+  const renderPage = (path) => (_, res) => {
     const prerender = renderToString(
-      view({
-        data: {
-          countries: []
-        },
-        hello: 'Click to fetch countries info'
+      Router({
+        location: {
+          path
+        }
       })
     )
 
-    const markup = `
-  <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fullstack Hyperapp template</title>
-</head>
-<body>
-  <div id="app">${prerender}</div>
-  <script src="/index.js"></script>
-</body>
-</html>
-  `
+    res.send(template(prerender))
+  }
 
-    res.send(markup)
-  })
-
-if (isProd) app.listen(PORT, () => console.log(`Started a prod server on http://${HOST}:${PORT}`))
-else {
+  routes.forEach((route) => app.get(route, renderPage(route)))
+  app.listen(PORT, () => console.log(`Started a prod server on http://${HOST}:${PORT}`))
+} else {
   const bundler = new Bundler('./index.html')
 
   console.log(`Bundling frontend with Parcel...`)

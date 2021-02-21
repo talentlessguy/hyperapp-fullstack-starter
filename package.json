@@ -5,7 +5,7 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "build": "parcel build src/browser/app.js -o index.js",
+    "build": "parcel build src/app.js -o index.js",
     "start": "npm run build && NODE_ENV=production node server.js",
     "dev": "node server.js"
   },
