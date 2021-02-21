@@ -7,7 +7,7 @@ A Hyperapp fullstack starter application with batteries included.
 - ⚡ SSR with [tinyhttp](tinyhttp.v1rtl.site/) and [hyperapp-render](https://github.com/kriasoft/hyperapp-render)
 - 🛠️ Development and production modes
 - ✨ ESM on both client and server
-- ☁ Deployable on [Vercel](https://vercel.com)
+- ☁ Deployable on [Render](https://render.com)
 
 ## Install
 
