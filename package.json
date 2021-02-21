@@ -10,6 +10,9 @@
     "start": "NODE_ENV=production node server.js",
     "dev": "node server.js"
   },
+  "engines": {
+    "node": ">=14"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
