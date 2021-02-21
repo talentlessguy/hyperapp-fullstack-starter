@@ -1,6 +1,8 @@
 # Hyperapp fullstack starter
 
-A Hyperapp fullstack starter application with batteries included.
+A [Hyperapp](https://github.com/jorgebucaran/hyperapp) fullstack starter application with batteries included.
+
+[Demo ↗](https://hyperapp-fullstack-starter.onrender.com/)
 
 - 🏄 Client and server routing
 - 📦 Bundling with Parcel
