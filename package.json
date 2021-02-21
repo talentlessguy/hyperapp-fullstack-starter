@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "NODE_ENV=production parcel build index.html",
+    "prestart": "npm run build",
     "start": "NODE_ENV=production node server.js",
     "dev": "node server.js"
   },
