@@ -7,7 +7,7 @@
   "scripts": {
     "build": "NODE_ENV=production parcel build index.html",
     "start": "NODE_ENV=production node server.js",
-    "dev": "node dev.js"
+    "dev": "node server.js"
   },
   "keywords": [],
   "author": "",
