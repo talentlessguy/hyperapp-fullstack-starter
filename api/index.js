@@ -1,3 +1,3 @@
 import { createApp } from '../server.js'
 
-module.exports = async (req, res) => (await createApp()).handler
+module.exports = async (req, res) => (await createApp()).handler(req, res)
