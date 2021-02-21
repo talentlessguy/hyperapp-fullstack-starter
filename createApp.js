@@ -2,7 +2,7 @@ import { App } from '@tinyhttp/app'
 import { logger } from '@tinyhttp/logger'
 import serve from 'serve-static'
 import Bundler from 'parcel'
-import { getCountries } from './functions/countries.js/index.js'
+import { getCountries } from './functions/countries.js'
 import { renderPage } from './src/util/server/renderPage.js'
 
 export const createApp = async () => {
