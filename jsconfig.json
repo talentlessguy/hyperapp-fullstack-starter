@@ -3,7 +3,9 @@
     "module": "esnext",
     "target": "esnext",
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "moduleResolution": "Node"
   },
-  "include": ["api/*.js", "src/**/*.js", "server.js"]
+  "include": ["./**/*.js"],
+  "exclude": ["node_modules", "dist", ".cache"]
 }

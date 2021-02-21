@@ -14,16 +14,11 @@ const isProd = process.env.NODE_ENV === 'production'
 const PORT = parseInt(process.env.PORT, 10) || 3000
 const HOST = process.env.HOST || 'localhost'
 
-app
-  .get('/api/countries', getCountries)
-  .use(serve('dist'))
-  .get('*', (req, res) => {
-    res.sendFile(`${process.cwd()}/dist/index.html`)
-  })
+app.get('/api/countries', getCountries)
 
 if (isProd) {
   const routes = ['/', '/countries']
-  const renderPage = (path) => (_, res) => {
+  const renderPage = (path) => async (_, res) => {
     const prerender = renderToString(
       Router({
         location: {
@@ -33,13 +28,19 @@ if (isProd) {
       })
     )
 
-    res.send(template(prerender))
+    res.send(await template(prerender))
   }
 
   routes.forEach((route) => app.get(route, renderPage(route)))
-  app.listen(PORT, () => console.log(`Started a prod server on http://${HOST}:${PORT}`))
+  app.use(serve('dist')).listen(PORT, () => console.log(`Started a prod server on http://${HOST}:${PORT}`))
 } else {
   const bundler = new Bundler('./index.html')
+
+  app
+    .get('*', (_, res) => {
+      res.sendFile(`${process.cwd()}/dist/index.html`)
+    })
+    .use(serve('dist'))
 
   console.log(`Bundling frontend with Parcel...`)
 

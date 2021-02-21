@@ -9,7 +9,10 @@ const urlChanged = (state, location) => {
   return { ...state, location }
 }
 const linkClicked = (state, pathname) => {
-  return [state, [navigateTo, pathname]]
+  const initial = initialStates[pathname] || {}
+  const newState = { ...initial, ...state }
+
+  return [newState, [navigateTo, pathname]]
 }
 
 app({

@@ -5,7 +5,7 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "build": "parcel build src/app.js -o index.js",
+    "build": "NODE_ENV=production parcel build index.html",
     "start": "npm run build && NODE_ENV=production node server.js",
     "dev": "node server.js"
   },
@@ -17,6 +17,7 @@
     "hyperapp": "2.0.12",
     "hyperapp-render": "^4.0.0",
     "hyperlit": "^0.3.6",
+    "jsdom": "^16.4.0",
     "node-fetch": "^2.6.1",
     "parcel": "^1.12.4",
     "serve-static": "^1.14.1"

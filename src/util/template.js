@@ -1,14 +1,14 @@
-export const template = (prerender, title = 'Fullstack Hyperapp template') => `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>${title}</title>
-</head>
-<body>
-<div id="app">${prerender}</div>
-<script src="/index.js"></script>
-</body>
-</html>
-`
+import jsdom from 'jsdom'
+import fs from 'fs/promises'
+
+export const template = async (prerender, title = 'Fullstack Hyperapp template') => {
+  const htmlFile = await fs.readFile('dist/index.html')
+
+  const dom = new jsdom.JSDOM(htmlFile.toString())
+
+  dom.window.document.title = title
+
+  dom.window.document.getElementById('app').innerHTML = prerender
+
+  return dom.serialize()
+}
