@@ -2,27 +2,31 @@
   "name": "hyperapp-ssr",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
+  "type": "module",
   "scripts": {
-    "build:www": "parcel build src/browser.js -o index.js",
-    "start": "npm run build:www && node server.js",
-    "dev": "parcel index.html -p 4444"
+    "build": "parcel build src/browser/app.js -o index.js",
+    "start": "npm run build && NODE_ENV=production node server.js",
+    "dev": "node server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@tinyhttp/app": "^1.1.12",
+    "@tinyhttp/app": "^1.1.17",
     "hyperapp": "2.0.12",
     "hyperapp-render": "^4.0.0",
+    "hyperlit": "^0.3.6",
+    "node-fetch": "^2.6.1",
     "parcel": "^1.12.4",
     "serve-static": "^1.14.1"
   },
-  "type": "module",
   "devDependencies": {
-    "@babel/core": "^7.12.13",
-    "@babel/preset-env": "^7.12.13",
-    "@types/node": "^14.14.25",
-    "@types/serve-static": "^1.13.9"
+    "@babel/core": "^7.12.17",
+    "@babel/preset-env": "^7.12.17",
+    "@types/node": "^14.14.31",
+    "@types/node-fetch": "^2.5.8",
+    "@types/serve-static": "^1.13.9",
+    "cssnano": "^4.1.10"
   }
 }

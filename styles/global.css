@@ -1,0 +1,23 @@
+body {
+  margin: 0;
+}
+
+body,
+html {
+  height: 100%;
+}
+
+#info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
+
+#grid {
+  padding: 3rem;
+  gap: 3rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
