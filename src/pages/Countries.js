@@ -24,7 +24,8 @@ const Countries = (state) => {
     </div>`}
 
     <div id="grid">
-      ${state.countries?.map(
+      ${state.countries &&
+      state.countries.map(
         (country) => html`<div>
           <h2>${country.emoji} ${country.name}</h2>
           <p>Capital: ${country.capital}</p>
