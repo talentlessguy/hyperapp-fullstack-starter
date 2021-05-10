@@ -1,6 +1,5 @@
 import { app } from 'hyperapp'
 import { Router } from './router.js'
-import '../styles/global.css'
 import { parseUrl, navigateTo } from './util/client/url.js'
 import { onUrlChange, onUrlRequest } from './subs/navigation.js'
 import { initialStates } from './init.js'

@@ -5,7 +5,7 @@ A [Hyperapp](https://github.com/jorgebucaran/hyperapp) fullstack starter applica
 [Demo ↗](https://hyperapp-fullstack-starter.onrender.com/)
 
 - 🏄 Client and server routing
-- 📦 Bundling with Parcel
+- 📦 Bundling with Vite
 - ⚡ SSR with [tinyhttp](tinyhttp.v1rtl.site/) and [hyperapp-render](https://github.com/kriasoft/hyperapp-render)
 - 🛠️ Development and production modes
 - ✨ ESM on both client and server
